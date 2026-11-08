@@ -22,8 +22,23 @@ LARGEST_WEIGHT = 0.1
 # TODO (Vai 2): thêm các tiêu chí như monotonicity, smoothness, ô lớn ở góc,
 # tiềm năng gộp ô; rồi tối ưu tốc độ (ví dụ tính trước điểm cho từng hàng).
 
-
 def evaluate(board: np.ndarray) -> float:
-    empty_cells = int(np.count_nonzero(board == 0))
-    largest_tile = int(board.max())
-    return EMPTY_WEIGHT * empty_cells + LARGEST_WEIGHT * largest_tile
+    b= board.tolist()
+    o_trong = sum(1 for row in b for i in row if i == 0)
+
+    cap = 0   
+    for i in range(4):
+        for j in range(4):
+            if b[i][j]==0:
+                continue
+            if j<3 and b[i][j] == b[i][j+1]:
+                cap+=1
+            if i<3 and b[i][j] == b[i+1][j]:
+                cap+=1
+    lon_nhat = max(max(row) for row in b)
+    diem = EMPTY_WEIGHT *(o_trong + cap)
+
+    if lon_nhat in (b[0][0], b[3][3], b[0][3], b[3][0]):
+        diem+= LARGEST_WEIGHT*lon_nhat
+    return float(diem)
+
