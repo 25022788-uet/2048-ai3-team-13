@@ -6,9 +6,8 @@
 ## Ai được sửa file nào
 | File / thư mục | Ai được sửa |
 |---|---|
-| `student/agent.py`, `.github/`, `.gitignore` (chỉ thêm dòng), `TEAM.md`, `tests/test_team_interfaces.py` | Trưởng nhóm (Vai 1) |
-| `student/heuristic.py`, `team/tuning/`, `tests/test_team_heuristic.py` | Vai 2 |
-| `student/search.py`, `tests/test_team_search.py` | Vai 3 |
+| `student/search.py`, `tests/test_team_search.py`, `student/agent.py`, `.github/`, `.gitignore` (chỉ thêm dòng), `TEAM.md`, `tests/test_team_interfaces.py` | Trưởng nhóm (Vai 1) |
+| `student/heuristic.py`, `team/tuning/`, `tests/test_team_heuristic.py` | Vai 2 | 
 | `student/time_manager.py`, `student/fastboard.py`, `tests/test_team_perf.py` | Vai 4 |
 | `team/bench/`, `docs/`, `tests/test_team_integration.py` | Vai 5 |
 | Mọi thứ còn lại (`src/`, `scripts/`, test cũ của thầy, `student/examples/`, `student/__init__.py`, `README.md`, `INSTALLATION.md`, `pyproject.toml`, `requirements.txt`, `.vscode/`, `assets/`) | Không ai |
