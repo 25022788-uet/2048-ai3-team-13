@@ -18,6 +18,8 @@ import numpy as np
 # Trọng số để ở đầu file: khi tuning chỉ cần đổi các hằng số này.
 EMPTY_WEIGHT = 250.0
 LARGEST_WEIGHT = 0.1
+MONO_WEIGHT = 47.0
+SMOOTH_WEIGHT = 15.0
 
 # TODO (Vai 2): thêm các tiêu chí như monotonicity, smoothness, ô lớn ở góc,
 # tiềm năng gộp ô; rồi tối ưu tốc độ (ví dụ tính trước điểm cho từng hàng).
@@ -35,10 +37,46 @@ def evaluate(board: np.ndarray) -> float:
                 cap+=1
             if i<3 and b[i][j] == b[i+1][j]:
                 cap+=1
-    lon_nhat = max(max(row) for row in b)
-    diem = EMPTY_WEIGHT *(o_trong + cap)
 
+#monotoncity
+    mu=[]
+    for row in b:
+        hang_mu=[]
+        for v in row:
+            if v > 0:
+                hang_mu.append(v.bit_length()-1)
+            else:
+                hang_mu.append(0)
+        mu.append(hang_mu)
+
+    phat = 0
+    for day in mu + [list(c) for c in zip(*mu)]:
+        tang = 0
+        giam = 0
+        for k in range(3):
+            d = day[k+1] - day[k]
+            if d > 0:
+                tang+=d
+            else:
+                giam-=d
+        phat += min(tang,giam)
+    diem_phat_1 = phat * MONO_WEIGHT
+
+#smoothness
+    lech = 0
+    for i in range(4):
+        for j in range(4):
+            if b[i][j] == 0:
+                continue
+            if j < 3 and b[i][j+1] != 0:
+                lech += abs(mu[i][j+1] - mu[i][j])
+            if i < 3 and b[i+1][j] != 0:
+                lech += abs(mu[i+1][j] - mu[i][j])
+    diem_phat_2 = lech * SMOOTH_WEIGHT
+
+    diem = EMPTY_WEIGHT *(o_trong + cap) - diem_phat_1 - diem_phat_2
+
+    lon_nhat = max(max(row) for row in b)
     if lon_nhat in (b[0][0], b[3][3], b[0][3], b[3][0]):
         diem+= LARGEST_WEIGHT*lon_nhat
     return float(diem)
-
