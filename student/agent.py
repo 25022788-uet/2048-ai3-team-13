@@ -22,10 +22,9 @@ class Agent:
         self.fallback_count = 0
         self._warned = False
         search.reset(seed)
-        time_manager.reset(seed)
 
   
-    @property
+    @property 
     def last_nodes(self) -> int:
         return search.last_nodes
 
