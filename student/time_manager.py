@@ -25,7 +25,7 @@ import numpy as np
 
 SAFETY_BUFFER_MS = 1000.0
 MIN_BUDGET_MS = 3.0
-MAX_BUDGET_MS = 300.0
+MAX_BUDGET_MS = 90.0
 PROB_CUTOFF = 0.001
 
 def reset(seed: int | None = None) -> None:

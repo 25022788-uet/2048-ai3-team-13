@@ -16,10 +16,10 @@ from __future__ import annotations
 import numpy as np
 
 # Trọng số để ở đầu file: khi tuning chỉ cần đổi các hằng số này.
-EMPTY_WEIGHT = 250.0
-LARGEST_WEIGHT = 0.1
-MONO_WEIGHT = 47.0
-SMOOTH_WEIGHT = 15.0
+EMPTY_WEIGHT = 50.0
+LARGEST_WEIGHT = 3
+MONO_WEIGHT = 200.0
+SMOOTH_WEIGHT = 180.0
 
 # TODO (Vai 2): thêm các tiêu chí như monotonicity, smoothness, ô lớn ở góc,
 # tiềm năng gộp ô; rồi tối ưu tốc độ (ví dụ tính trước điểm cho từng hàng).
