@@ -35,6 +35,6 @@ def allocate_ms(obs: Observation, time_limit_ms: float) -> float:
     danger_mult = 3.50
   else:
     danger_mult = 5.00
-  budget = base_budget * danger_mult
+  budget = base_budget * danger_mult   # cần bao nhiêu thời gian 
   budget = max(MIN_BUDGET_MS, min(budget, MAX_BUDGET_MS))  
   return max(1.0, min(budget, time_limit_ms))
